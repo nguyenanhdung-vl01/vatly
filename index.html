@@ -1,32 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Website vật lý</title>
-  </head>
-  <body>
-    <h1>🌏Physics - Vật lý hay !</h1>
-    <a href="./index.html">Trang chủ</a> |
-    <a href="./Kienthuc.html">Kiến thức</a> |
-    <a href="./Baitap.html">Bài tập</a>|
-    <a href="./Mophong.html">Mô phỏng</a>
-    <hr />
-    <h2>👀Trang chủ</h2>
-    <p>
-      <b><i>Vật lý mang đến sự mới mẻ</i></b
-      ><br />
-      <b><i>Hãy cố gắng lên nào bạn ơi</i></b
-      ><br />
-      <b><i>Không có gì quá muộn đâu nhé</i></b
-      ><br />
-      <b><i>Chúng ta vẫn ở đây giúp nhau</i></b
-      ><br />
-    </p>
-    <img
-      src="./Vatly.jpg"
-      alt="Hình ảnh vật lý"
-      style="width: 100%; height: auto"
-    />
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Thực Nghiệm Vật Lý</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Phòng Thực Nghiệm Vật Lý</h1>
+            <p>Học vật lý qua các thí nghiệm tương tác</p>
+        </header>
+
+        <nav class="menu">
+            <button class="nav-btn active" onclick="showExperiment('motion')">Chuyển động</button>
+            <button class="nav-btn" onclick="showExperiment('gravity')">Trọng lực</button>
+            <button class="nav-btn" onclick="showExperiment('wave')">Sóng</button>
+            <button class="nav-btn" onclick="showExperiment('energy')">Năng lượng</button>
+        </nav>
+
+        <main>
+            <!-- Thí nghiệm 1: Chuyển động -->
+            <section id="motion" class="experiment active">
+                <h2>Thí Nghiệm 1: Chuyển Động Thẳng Đều</h2>
+                <div class="experiment-content">
+                    <div class="canvas-container">
+                        <canvas id="motionCanvas" width="600" height="300"></canvas>
+                    </div>
+                    <div class="controls">
+                        <label>Vận tốc: <input type="range" id="velocitySlider" min="0" max="10" value="3" step="0.5" onchange="updateVelocityDisplay()"></label>
+                        <span id="velocityValue">3 m/s</span>
+                        <button onclick="startMotion()" class="btn-primary">Bắt đầu</button>
+                        <button onclick="resetMotion()" class="btn-secondary">Đặt lại</button>
+                    </div>
+                    <div class="info">
+                        <p><strong>Vị trí:</strong> <span id="positionDisplay">0</span> m</p>
+                        <p><strong>Thời gian:</strong> <span id="timeDisplay">0</span> s</p>
+                        <p><strong>Công thức:</strong> s = v × t</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thí nghiệm 2: Trọng lực -->
+            <section id="gravity" class="experiment">
+                <h2>Thí Nghiệm 2: Rơi Tự Do</h2>
+                <div class="experiment-content">
+                    <div class="canvas-container">
+                        <canvas id="gravityCanvas" width="600" height="400"></canvas>
+                    </div>
+                    <div class="controls">
+                        <label>Độ cao: <input type="range" id="heightSlider" min="50" max="400" value="300" step="10" onchange="updateHeightDisplay()"></label>
+                        <span id="heightValue">300 m</span>
+                        <button onclick="startGravity()" class="btn-primary">Thả vật</button>
+                        <button onclick="resetGravity()" class="btn-secondary">Đặt lại</button>
+                    </div>
+                    <div class="info">
+                        <p><strong>Độ cao hiện tại:</strong> <span id="heightDisplay">0</span> m</p>
+                        <p><strong>Vận tốc:</strong> <span id="gravityVelocityDisplay">0</span> m/s</p>
+                        <p><strong>Thời gian rơi:</strong> <span id="fallTimeDisplay">0</span> s</p>
+                        <p><strong>Công thức:</strong> h = ½gt², v = gt (g = 10 m/s²)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thí nghiệm 3: Sóng -->
+            <section id="wave" class="experiment">
+                <h2>Thí Nghiệm 3: Sóng Hình Sin</h2>
+                <div class="experiment-content">
+                    <div class="canvas-container">
+                        <canvas id="waveCanvas" width="600" height="300"></canvas>
+                    </div>
+                    <div class="controls">
+                        <label>Tần số: <input type="range" id="frequencySlider" min="0.5" max="3" value="1" step="0.1" onchange="updateFrequencyDisplay()"></label>
+                        <span id="frequencyValue">1 Hz</span>
+                        <label>Biên độ: <input type="range" id="amplitudeSlider" min="20" max="100" value="50" step="5" onchange="updateAmplitudeDisplay()"></label>
+                        <span id="amplitudeValue">50 px</span>
+                        <button onclick="startWave()" class="btn-primary">Phát hành</button>
+                        <button onclick="stopWave()" class="btn-secondary">Dừng</button>
+                    </div>
+                    <div class="info">
+                        <p><strong>Công thức:</strong> y = A × sin(2πft + φ)</p>
+                        <p><strong>A:</strong> Biên độ | <strong>f:</strong> Tần số | <strong>t:</strong> Thời gian</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thí nghiệm 4: Năng lượng -->
+            <section id="energy" class="experiment">
+                <h2>Thí Nghiệm 4: Bảo Toàn Năng Lượng</h2>
+                <div class="experiment-content">
+                    <div class="canvas-container">
+                        <canvas id="energyCanvas" width="600" height="350"></canvas>
+                    </div>
+                    <div class="controls">
+                        <label>Độ cao ban đầu: <input type="range" id="initialHeightSlider" min="50" max="300" value="250" step="10" onchange="updateInitialHeightDisplay()"></label>
+                        <span id="initialHeightValue">250 m</span>
+                        <button onclick="startEnergy()" class="btn-primary">Thả bóng</button>
+                        <button onclick="resetEnergy()" class="btn-secondary">Đặt lại</button>
+                    </div>
+                    <div class="info">
+                        <p><strong>Thế năng:</strong> <span id="potentialEnergyDisplay">0</span> J</p>
+                        <p><strong>Động năng:</strong> <span id="kineticEnergyDisplay">0</span> J</p>
+                        <p><strong>Tổng năng lượng:</strong> <span id="totalEnergyDisplay">0</span> J</p>
+                        <p><strong>Công thức:</strong> E_total = PE + KE = mgh + ½mv²</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 Hãy thử các thí nghiệm và khám phá những quy luật vật lý thú vị!</p>
+            <p>Phòng thực nghiệm vật lý tương tác - Học tập hiệu quả hơn</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
